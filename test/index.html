@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="ca">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Too Fast Too Serious - Plà d'empresa</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+        
+        /* Header Styles */
+        header {
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #fdbb2d);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 1rem;
+        }
+        
+        .presentation-info {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .info-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+        
+        /* Navigation */
+        nav {
+            background-color: #fff;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+        
+        .logo {
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: #1a2a6c;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 1.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            padding: 1rem 0;
+            display: block;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #1a2a6c;
+        }
+        
+        /* Main Content */
+        main {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+        
+        section {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+        
+        h2 {
+            color: #1a2a6c;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        h3 {
+            color: #b21f1f;
+            margin: 1.5rem 0 1rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+        }
+        
+        ul, ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Highlighted Sections */
+        .highlight-box {
+            background-color: #f8f9fa;
+            border-left: 4px solid #fdbb2d;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 1.5rem 0;
+        }
+        
+        .service-card {
+            background-color: #f8f9fa;
+            border-radius: 6px;
+            padding: 1.5rem;
+            border-top: 4px solid #1a2a6c;
+        }
+        
+        .service-card h4 {
+            color: #1a2a6c;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+        
+        th, td {
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: #1a2a6c;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            
+            .nav-links {
+                margin-top: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .nav-links li {
+                margin: 0.5rem;
+            }
+            
+            .presentation-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Too Fast Too Serious</h1>
+            <p class="subtitle">Serveis de courier d'alta velocitat amb discreció total</p>
+            <div class="presentation-info">
+                <div class="info-item">Nom: Muhammad Sohaib Ellahi</div>
+                <div class="info-item">Data: 24/09/2025</div>
+                <div class="info-item">Plà d'empresa</div>
+            </div>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <div class="logo">Too Fast Too Serious</div>
+            <ul class="nav-links">
+                <li><a href="#fitxa">Fitxa de l'emprenedoria</a></li>
+                <li><a href="#activitat">Activitat empresarial</a></li>
+                <li><a href="#equip">Equip promotor</a></li>
+                <li><a href="#valor">Proposta de valor</a></li>
+                <li><a href="#mercat">Estudi de mercat</a></li>
+                <li><a href="#pressupost">Pressuposts</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <main>
+        <section id="fitxa">
+            <h2>Fitxa de l'emprenedoria</h2>
+            <p>El nom comercial de la nostra empresa serà "Too Fast Too Serious", un nom que transmet immediatament la nostra filosofia: rapidesa absoluta i un servei seriós i professional.</p>
+            
+            <h3>Direcció física i/o digital de l'empresa</h3>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h4>Seu principal</h4>
+                    <p>Londres, un punt estratègic a nivell global, on tenim la nostra seu principal per garantir una cobertura mundial i estar sempre a l'abast de qualsevol necessitat urgent.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Segona oficina</h4>
+                    <p>Nova York, responsable de gestionar les operacions més crítiques i de coordinar el servei als Estats Units i altres parts de l'Amèrica.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="activitat">
+            <h2>Activitat empresarial</h2>
+            <h3>Activitat principal de l'empresa</h3>
+            <p>La nostra empresa es dedica a la prestació de serveis de courier d'alta velocitat amb discreció total. Ens especialitzem en lliuraments exprés de paqueteria i documents que necessiten una rapidesa extrema i una total confidencialitat.</p>
+            
+            <h3>Serveis oferts</h3>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h4>Lliurament exprés d'enviaments</h4>
+                    <p>Ens especialitzem en entregues ràpides, amb un temps de resposta ultra ràpid, sense comprometre mai la seguretat ni la qualitat del servei.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Assumpció de responsabilitats</h4>
+                    <p>En cas d'imprevistos, ens encarreguem de gestionar excuses personalitzades per als nostres clients, amb solucions ràpides i efectives.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Operació anònima</h4>
+                    <p>Ens comprometem a operar de manera totalment anònima, garantint la màxima confidencialitat per a aquells clients que requereixen discreció absoluta.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="equip">
+            <h2>Equip promotor</h2>
+            <h3>Membres de l'equip promotor</h3>
+            <p>El nostre equip promotor està format per un grup dinàmic de creatius, entusiastes i professionals compromesos que compartien una visió comú: oferir un servei de courier ràpid, fiable i discret.</p>
+            
+            <h3>Rol específic de cada membre dins el projecte</h3>
+            <ul>
+                <li><strong>Coordinadors logístics:</strong> Seran responsables de garantir que cap enviament arribi tard.</li>
+                <li><strong>Conductors i transportistes:</strong> Són els encarregats de portar els enviaments utilitzant vehicles d'alta gamma.</li>
+                <li><strong>Gestors d'incidents:</strong> Aquest equip coordina qualsevol incidència que pugui sorgir durant el procés de lliurament.</li>
+                <li><strong>Equip creatiu:</strong> Format per persones amb gran capacitat de resolució de problemes i una mentalitat innovadora.</li>
+            </ul>
+            
+            <h3>Experiència prèvia i habilitats dels membres</h3>
+            <ul>
+                <li><strong>Experts en logística i transport exprés:</strong> Professionals de reconegut prestigi dins del sector de la logística.</li>
+                <li><strong>Conductors de vehicles d'alta gamma:</strong> Professionals formats en conducció de vehicles ràpids i potents.</li>
+                <li><strong>Equip creatiu especialitzat en confidencialitat:</strong> Gran experiència en la gestió d'escenaris de crisi i situacions de màxima confidencialitat.</li>
+            </ul>
+        </section>
+        
+        <section id="valor">
+            <h2>Proposta de valor</h2>
+            <p>Oferim un servei únic i especialitzat que genera confiança i seguretat tant per als nostres clients com pels destinataris de les seves entregues.</p>
+            
+            <div class="highlight-box">
+                <p>La competència en el nostre sector és limitada i poc especialitzada. El nostre servei és altament especialitzat i únic, combinant velocitat, discreció i un enfocament creatiu per gestionar qualsevol incident.</p>
+            </div>
+            
+            <h3>Aspectes més destacats i innovadors</h3>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h4>Anonimat absolut</h4>
+                    <p>El nostre servei funciona de manera totalment anònima, garantint que els nostres clients no seran mai identificats com a responsables.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Excuses personalitzades</h4>
+                    <p>Ens especialitzem en crear excuses personalitzades per als nostres clients en casos de retards o oblits.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Entrega ràpida i amb estil</h4>
+                    <p>Utilitzem vehicles d'alta velocitat per realitzar les entregues amb màxima rapidesa, estil i professionalitat.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Impacte emocional</h4>
+                    <p>Més enllà de simplement entregar paquets, el nostre servei està dissenyat per oferir tranquil·litat i reparar relacions.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="mercat">
+            <h2>Estudi de mercat</h2>
+            <h3>Demanda</h3>
+            <p>Hi ha una demanda real per al servei que oferim, especialment en mercats on el valor emocional i la discreció són fonamentals.</p>
+            
+            <h3>Oferta</h3>
+            <p>Els nostres competidors directes inclouen Postmates, FedEx Custom Critical i DHL Same Day Delivery, però cap ofereix el valor afegit de la discreció ni les excuses personalitzades que oferim.</p>
+            
+            <h3>Definició del públic objectiu</h3>
+            <ul>
+                <li><strong>Demogràfiques:</strong> Adults de 25 a 45 anys, amb poder adquisitiu mitjà-alt.</li>
+                <li><strong>Geogràfiques:</strong> Clients ubicats a ciutats amb alta demanda de serveis de lliurament ràpid.</li>
+                <li><strong>Psicogràfiques:</strong> Persones que treballen sota pressió, valorant la rapidesa, l'eficiència i el servei personalitzat.</li>
+            </ul>
+            
+            <h3>Estratègies de màrqueting</h3>
+            <div class="service-grid">
+                <div class="service-card">
+                    <h4>Preu</h4>
+                    <p>Estratègia de preus dinàmics basada en la urgència i personalització del servei.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Distribució</h4>
+                    <p>Servei exclusivament online mitjançant una plataforma web i aplicació mòbil.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Producte</h4>
+                    <p>Servei de lliurament exprés amb vehicles d'alta velocitat i excuses personalitzades.</p>
+                </div>
+                <div class="service-card">
+                    <h4>Promoció</h4>
+                    <p>Presència activa a xarxes socials i col·laboració amb influencers.</p>
+                </div>
+            </div>
+        </section>
+        
+        <section id="pressupost">
+            <h2>Pressuposts</h2>
+            <h3>Pressupost d'inici</h3>
+            <p>Per tirar endavant el projecte i cobrir els primers sis mesos d'operacions, necessitem una inversió inicial de 724.000€.</p>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>Concepte</th>
+                        <th>Cost (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Flota de vehicles</td>
+                        <td>375.000</td>
+                    </tr>
+                    <tr>
+                        <td>Logística i operativa</td>
+                        <td>70.000</td>
+                    </tr>
+                    <tr>
+                        <td>Equip humà</td>
+                        <td>120.000</td>
+                    </tr>
+                    <tr>
+                        <td>Oficines</td>
+                        <td>69.000</td>
+                    </tr>
+                    <tr>
+                        <td>Presència digital i tecnologia</td>
+                        <td>75.000</td>
+                    </tr>
+                    <tr>
+                        <td>Legal i imprevistos</td>
+                        <td>35.000</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>724.000</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Fonts de finançament</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Font</th>
+                        <th>Percentatge</th>
+                        <th>Import (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Inversors</td>
+                        <td>55%</td>
+                        <td>400.000</td>
+                    </tr>
+                    <tr>
+                        <td>Préstecs</td>
+                        <td>28%</td>
+                        <td>200.000</td>
+                    </tr>
+                    <tr>
+                        <td>Fons propis</td>
+                        <td>10%</td>
+                        <td>74.000</td>
+                    </tr>
+                    <tr>
+                        <td>Ajudes públiques</td>
+                        <td>7%</td>
+                        <td>50.000</td>
+                    </tr>
+                    <tr>
+                        <th>Total</th>
+                        <th>100%</th>
+                        <th>724.000</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <h3>Projecció d'ingressos any 1</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Període</th>
+                        <th>Ingressos (€)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Mesos 1-3</td>
+                        <td>23.000</td>
+                    </tr>
+                    <tr>
+                        <td>Mesos 4-6</td>
+                        <td>50.500</td>
+                    </tr>
+                    <tr>
+                        <td>Mesos 7-9</td>
+                        <td>94.500</td>
+                    </tr>
+                    <tr>
+                        <td>Mesos 10-12</td>
+                        <td>147.500</td>
+                    </tr>
+                    <tr>
+                        <th>Total Any 1</th>
+                        <th>946.500</th>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <div class="highlight-box">
+                <p>El punt d'equilibri s'assolirà aproximadament entre els 6 i 9 mesos, quan les vendes comencin a cobrir les despeses fixes i variables de l'empresa.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <p>Too Fast Too Serious - Servei de courier d'alta velocitat amb discreció total</p>
+            <p>Plà d'empresa presentat per Muhammad Sohaib Ellahi</p>
+        </div>
+    </footer>
+</body>
+</html>

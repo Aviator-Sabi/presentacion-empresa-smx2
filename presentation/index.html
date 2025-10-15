@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Too Fast Too Serious</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 40px;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, #e94560, #f39c12, #e94560);
+            background-size: 200% 100%;
+            animation: gradient 3s ease infinite;
+        }
+        
+        @keyframes gradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        .title-slide {
+            text-align: center;
+            background: linear-gradient(135deg, #0f0f0f 0%, #1a1a2e 50%, #16213e 100%);
+        }
+        
+        h1 {
+            font-size: 4em;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #e94560, #f39c12);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 900;
+            letter-spacing: -2px;
+        }
+        
+        .subtitle {
+            font-size: 1.5em;
+            color: #b0b0b0;
+            margin-bottom: 40px;
+        }
+        
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            color: #e94560;
+            font-weight: 700;
+        }
+        
+        h3 {
+            font-size: 1.8em;
+            margin: 30px 0 15px;
+            color: #f39c12;
+        }
+        
+        p, li {
+            font-size: 1.2em;
+            line-height: 1.8;
+            color: #d0d0d0;
+            margin-bottom: 15px;
+        }
+        
+        ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        li {
+            padding-left: 30px;
+            position: relative;
+            margin-bottom: 20px;
+        }
+        
+        li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: #e94560;
+            font-weight: bold;
+        }
+        
+        .highlight-box {
+            background: rgba(233, 69, 96, 0.1);
+            border-left: 4px solid #e94560;
+            padding: 25px;
+            margin: 30px 0;
+            border-radius: 10px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: rgba(243, 156, 18, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 2px solid rgba(243, 156, 18, 0.3);
+            transition: transform 0.3s;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: #f39c12;
+        }
+        
+        .stat-number {
+            font-size: 3em;
+            font-weight: 900;
+            color: #f39c12;
+            display: block;
+            margin-bottom: 10px;
+        }
+        
+        .stat-label {
+            font-size: 1.1em;
+            color: #b0b0b0;
+        }
+        
+        .two-column {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin: 30px 0;
+        }
+        
+        .swot-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            margin: 30px 0;
+        }
+        
+        .swot-card {
+            padding: 25px;
+            border-radius: 15px;
+            border: 2px solid;
+        }
+        
+        .strengths { background: rgba(46, 213, 115, 0.1); border-color: #2ed573; }
+        .weaknesses { background: rgba(255, 71, 87, 0.1); border-color: #ff4757; }
+        .opportunities { background: rgba(52, 172, 224, 0.1); border-color: #34ace0; }
+        .threats { background: rgba(255, 159, 64, 0.1); border-color: #ff9f40; }
+        
+        .swot-card h3 {
+            margin-top: 0;
+        }
+        
+        .budget-table {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .budget-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .budget-row:last-child {
+            border-bottom: none;
+            font-weight: bold;
+            font-size: 1.3em;
+            color: #f39c12;
+        }
+        
+        .nav-dots {
+            position: fixed;
+            right: 30px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+        
+        .nav-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 10px 0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .nav-dot:hover, .nav-dot.active {
+            background: #e94560;
+            transform: scale(1.3);
+        }
+        
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5em; }
+            h2 { font-size: 1.8em; }
+            .two-column, .swot-grid { grid-template-columns: 1fr; }
+            .slide { padding: 40px 20px; }
+            .nav-dots { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Diapositiva 1: Título -->
+        <div class="slide title-slide">
+            <h1>TOO FAST TOO SERIOUS</h1>
+            <p class="subtitle">Servicios de Mensajería Ultra-Rápida con Discreción Absoluta</p>
+            <p style="margin-top: 60px; font-size: 1.1em; color: #888;">Muhammad Sohaib Ellahi | Septiembre 2025</p>
+        </div>
+
+        <!-- Diapositiva 2: Descripción General -->
+        <div class="slide">
+            <h2>Descripción General de la Empresa</h2>
+            <div class="highlight-box">
+                <p><strong>Misión:</strong> Proporcionar servicios de mensajería ultra-rápida con discreción completa y soluciones personalizadas para entregas críticas en el tiempo.</p>
+            </div>
+            <h3>Sedes Principales</h3>
+            <ul>
+                <li><strong>Principal:</strong> Londres - Centro global de logística y operaciones</li>
+                <li><strong>Secundaria:</strong> Nueva York - Centro de operaciones para Norteamérica</li>
+            </ul>
+            <h3>Servicios Principales</h3>
+            <ul>
+                <li>Entrega exprés con velocidad garantizada</li>
+                <li>Anonimato y confidencialidad completa</li>
+                <li>Gestión personalizada de incidencias</li>
+                <li>Servicio premium con vehículos de alto rendimiento</li>
+            </ul>
+        </div>
+
+        <!-- Diapositiva 3: Propuesta de Valor -->
+        <div class="slide">
+            <h2>Propuesta de Valor Única</h2>
+            <div class="two-column">
+                <div>
+                    <h3>Lo Que Nos Diferencia</h3>
+                    <ul>
+                        <li>Anonimato absoluto garantizado</li>
+                        <li>Creación de excusas personalizadas</li>
+                        <li>Entrega con estilo usando vehículos premium</li>
+                        <li>Impacto emocional y reparación de relaciones</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>Flota de Vehículos</h3>
+                    <ul>
+                        <li>Dodge Challengers</li>
+                        <li>Ford Mustangs</li>
+                        <li>Corvettes y Ferraris</li>
+                        <li>Vehículos de lujo de alto rendimiento</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Innovación:</strong> Somos el único servicio que combina logística ultra-rápida con gestión creativa de incidencias y discreción completa.</p>
+            </div>
+        </div>
+
+        <!-- Diapositiva 4: Oportunidad de Mercado -->
+        <div class="slide">
+            <h2>Oportunidad de Mercado</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">$400B</span>
+                    <span class="stat-label">Mercado Global de Mensajería (2023)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">6%</span>
+                    <span class="stat-label">Tasa de Crecimiento Anual</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">24h</span>
+                    <span class="stat-label">Demanda de Entrega</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">10+</span>
+                    <span class="stat-label">Ciudades Objetivo Año 3</span>
+                </div>
+            </div>
+            <h3>Cliente Objetivo</h3>
+            <ul>
+                <li><strong>Demografía:</strong> Adultos 25-45 años, urbanos, ingresos medios-altos</li>
+                <li><strong>Psicografía:</strong> Profesionales ocupados, valoran tiempo y reputación</li>
+                <li><strong>Problemas:</strong> Regalos olvidados, documentos críticos, mantenimiento de relaciones</li>
+            </ul>
+        </div>
+
+        <!-- Diapositiva 5: Modelo de Negocio -->
+        <div class="slide">
+            <h2>Fuentes de Ingresos y Precios</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">€25</span>
+                    <span class="stat-label">Exprés (24-48h)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">€60</span>
+                    <span class="stat-label">Urgente (1-4h)</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">€100</span>
+                    <span class="stat-label">Servicio de Excusas</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">€1,500</span>
+                    <span class="stat-label">Corporativo Mensual</span>
+                </div>
+            </div>
+            <h3>Canales de Distribución</h3>
+            <ul>
+                <li>Plataforma web y aplicación móvil</li>
+                <li>Presencia en Instagram, TikTok, YouTube</li>
+                <li>Colaboraciones con influencers</li>
+                <li>Seguimiento y gestión en tiempo real</li>
+            </ul>
+        </div>
+
+        <!-- Diapositiva 6: Análisis DAFO -->
+        <div class="slide">
+            <h2>Análisis DAFO</h2>
+            <div class="swot-grid">
+                <div class="swot-card strengths">
+                    <h3>Fortalezas</h3>
+                    <ul>
+                        <li>Servicio único y especializado</li>
+                        <li>Discreción completa</li>
+                        <li>Flota de vehículos premium</li>
+                        <li>Soluciones personalizadas</li>
+                    </ul>
+                </div>
+                <div class="swot-card weaknesses">
+                    <h3>Debilidades</h3>
+                    <ul>
+                        <li>Dependencia de socios logísticos</li>
+                        <li>Cobertura inicial limitada</li>
+                        <li>Costos operativos elevados</li>
+                    </ul>
+                </div>
+                <div class="swot-card opportunities">
+                    <h3>Oportunidades</h3>
+                    <ul>
+                        <li>Creciente demanda de entregas exprés</li>
+                        <li>Potencial de expansión global</li>
+                        <li>Economía digital de relaciones</li>
+                    </ul>
+                </div>
+                <div class="swot-card threats">
+                    <h3>Amenazas</h3>
+                    <ul>
+                        <li>Competidores establecidos</li>
+                        <li>Aumento de costos operativos</li>
+                        <li>Cambios regulatorios</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 7: Proyecciones Financieras -->
+        <div class="slide">
+            <h2>Proyecciones Financieras - Año 1</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">€946K</span>
+                    <span class="stat-label">Ingresos Totales Año 1</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">€724K</span>
+                    <span class="stat-label">Inversión Inicial</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">6-9</span>
+                    <span class="stat-label">Meses hasta Equilibrio</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-number">30%</span>
+                    <span class="stat-label">Objetivo Crecimiento Año 1</span>
+                </div>
+            </div>
+            <h3>Crecimiento de Ingresos por Trimestre</h3>
+            <div class="budget-table">
+                <div class="budget-row">
+                    <span>Q1 (Meses 1-3)</span>
+                    <span>€23,000/mes</span>
+                </div>
+                <div class="budget-row">
+                    <span>Q2 (Meses 4-6)</span>
+                    <span>€50,500/mes</span>
+                </div>
+                <div class="budget-row">
+                    <span>Q3 (Meses 7-9)</span>
+                    <span>€94,500/mes</span>
+                </div>
+                <div class="budget-row">
+                    <span>Q4 (Meses 10-12)</span>
+                    <span>€147,500/mes</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Diapositiva 8: Desglose de Inversión -->
+        <div class="slide">
+            <h2>Inversión Inicial: €724,000</h2>
+            <div class="budget-table">
+                <div class="budget-row">
+                    <span>🚗 Flota de Vehículos (5 coches premium)</span>
+                    <span>€375,000</span>
+                </div>
+                <div class="budget-row">
+                    <span>📦 Logística y Operaciones</span>
+                    <span>€70,000</span>
+                </div>
+                <div class="budget-row">
+                    <span>👥 Equipo (salarios 6 meses)</span>
+                    <span>€120,000</span>
+                </div>
+                <div class="budget-row">
+                    <span>🏢 Oficinas (Londres + NYC)</span>
+                    <span>€69,000</span>
+                </div>
+                <div class="budget-row">
+                    <span>💻 Tecnología y Plataforma</span>
+                    <span>€75,000</span>
+                </div>
+                <div class="budget-row">
+                    <span>⚖️ Legal y Contingencias</span>
+                    <span>€35,000</span>
+                </div>
+            </div>
+            <h3>Fuentes de Financiación</h3>
+            <ul>
+                <li><strong>55%</strong> - Inversores Ángeles / Capital Riesgo (€400K)</li>
+                <li><strong>28%</strong> - Préstamos Bancarios (€200K)</li>
+                <li><strong>10%</strong> - Capital Fundadores (€74K)</li>
+                <li><strong>7%</strong> - Ayudas Públicas (€50K)</li>
+            </ul>
+        </div>
+
+        <!-- Diapositiva 9: Estrategia de Crecimiento -->
+        <div class="slide">
+            <h2>Estrategia de Crecimiento a 3 Años</h2>
+            <div class="two-column">
+                <div>
+                    <h3>6 Meses</h3>
+                    <ul>
+                        <li>50-100 clientes recurrentes</li>
+                        <li>Posicionamiento en Londres y NYC</li>
+                        <li>Excelencia operativa</li>
+                    </ul>
+                    <h3>1 Año</h3>
+                    <ul>
+                        <li>Expansión a 3-5 ciudades principales</li>
+                        <li>30% crecimiento de ingresos</li>
+                        <li>Expansión del equipo</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3>3 Años</h3>
+                    <ul>
+                        <li>10+ ciudades globales</li>
+                        <li>5-10% cuota de mercado</li>
+                        <li>Liderazgo en la industria</li>
+                        <li>Operaciones sostenibles</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="highlight-box">
+                <p><strong>Métricas Clave:</strong> Ventas mensuales, adquisición de clientes, crecimiento de cuota de mercado, NPS (Net Promoter Score)</p>
+            </div>
+        </div>
+
+        <!-- Diapositiva 10: Llamada a la Acción -->
+        <div class="slide title-slide">
+            <h2 style="color: #fff; margin-bottom: 40px;">Únete al Carril Rápido</h2>
+            <p style="font-size: 1.3em; margin-bottom: 30px;">Estamos revolucionando la entrega exprés con velocidad, estilo y discreción absoluta.</p>
+            <div class="stats-grid" style="margin-top: 60px;">
+                <div class="stat-card">
+                    <span class="stat-label">Oportunidad de Inversión</span>
+                    <span class="stat-number" style="font-size: 2em;">€724K</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">Ingresos Proyectados Año 1</span>
+                    <span class="stat-number" style="font-size: 2em;">€946K</span>
+                </div>
+            </div>
+            <p style="margin-top: 60px; font-size: 1.2em; color: #f39c12;"><strong>Too Fast Too Serious</strong> - La Velocidad se Encuentra con la Discreción</p>
+        </div>
+    </div>
+
+    <script>
+        // Smooth scroll behavior
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Add scroll reveal animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.slide').forEach(slide => {
+            slide.style.opacity = '0';
+            slide.style.transform = 'translateY(20px)';
+            slide.style.transition = 'all 0.6s ease-out';
+            observer.observe(slide);
+        });
+    </script>
+</body>
+</html>
